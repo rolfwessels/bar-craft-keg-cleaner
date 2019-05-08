@@ -1,0 +1,10 @@
+version: '3'
+services:
+  dev:
+    build:
+      context: ./
+    ports:
+      - "22:22"
+    volumes:
+      - './:/app'
+    entrypoint: top
