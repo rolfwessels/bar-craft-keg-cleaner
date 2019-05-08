@@ -7,12 +7,12 @@ class Buttons:
     full_run = PinInstance("Full Run", 19, False)
     tank_1_empty = PinInstance("Tank 1 Empty", 20, False)
     tank_2_empty = PinInstance("Tank 2 Empty", 21, False)
-    keg_empty = PinInstance("Keg Empty", 26, False)
+    keg_clean = PinInstance("Keg Clean", 26, False)
     start_stop = PinInstance("Started ", 16, False)
 
     @staticmethod
     def all_pins():
-        return [Buttons.full_run, Buttons.tank_1_empty, Buttons.tank_2_empty, Buttons.keg_empty, Buttons.start_stop]
+        return [Buttons.full_run, Buttons.tank_1_empty, Buttons.tank_2_empty, Buttons.keg_clean, Buttons.start_stop]
 
     @staticmethod
     def read_all():
@@ -21,7 +21,7 @@ class Buttons:
                 value.set_and_print(value.read())
 
     @staticmethod
-    def is_fullR2un_on():
+    def is_full_run_on():
         return Buttons.full_run.is_on()
 
     @staticmethod
@@ -33,8 +33,8 @@ class Buttons:
         return Buttons.tank_2_empty.is_on()
 
     @staticmethod
-    def is_keg_empty_on():
-        return Buttons.keg_empty.is_on()
+    def is_keg_clean_on():
+        return Buttons.keg_clean.is_on()
 
     @staticmethod
     def is_started():
@@ -99,7 +99,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 GPIO.setup([Buttons.full_run.pin(), Buttons.tank_1_empty.pin(), Buttons.tank_2_empty.pin(),
-            Buttons.keg_empty.pin(), Buttons.start_stop.pin()], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+            Buttons.keg_clean.pin(), Buttons.start_stop.pin()], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 all_pins = list(map(lambda x: x.pin(), Switches.all_pins()))
 GPIO.setup(all_pins, GPIO.OUT)

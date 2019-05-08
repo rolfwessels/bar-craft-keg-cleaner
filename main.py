@@ -2,11 +2,14 @@
 from config import Buttons
 from switch.tank_2_empty import run_empty_tank_two
 from switch.tank_1_empty import run_empty_tank_one
+from switch.keg_clean import run_keg_clean
+from switch.full_run import run_full_run
 import time
 import sys
-Buttons.start_stop.set(True)
-Buttons.tank_2_empty.set(True)
-Buttons.tank_1_empty.set(True)
+
+Buttons.start_stop.set_and_print(True)
+Buttons.full_run.set_and_print(True)
+
 try:
     while True:
         print('------------------')
@@ -28,6 +31,12 @@ try:
 
         if Buttons.is_started() & (Buttons.is_tank_2_empty_on()):
             run_empty_tank_two()
+
+        if Buttons.is_started() & (Buttons.is_keg_clean_on()):
+            run_keg_clean()
+
+        if Buttons.is_started() & (Buttons.is_full_run_on()):
+            run_full_run()
 
         print('press [start_stop] to stop.')
         Buttons.start_stop.set(False)
