@@ -7,17 +7,17 @@ SleepTimeDMP = 180
 
 
 def is_cancelled():
-    return (not Buttons.is_started()) or (not Buttons.is_tank_2_empty_on())
+    return (not Buttons.is_started()) or (not Buttons.is_tank_1_empty_on())
 
 
-def run_empty_tank_two():
-    print("Start empty tank 2")
+def run_empty_tank_one():
+    print("Start empty tank 1")
 
-    Switches.pmp2.write_and_print(True)
+    Switches.pmp1.write_and_print(True)
     safe_sleep(SleepTimeDELAY, is_cancelled)
     Switches.dump.write_and_print(True)
     safe_sleep(SleepTimeDMP, is_cancelled)
 
-    print("🎉🎉 Tank 2 empty done")
+    print("🎉🎉 Tank 1 empty done")
     Switches.dump.write_and_print(False)
-    Switches.pmp2.write_and_print(False)
+    Switches.pmp1.write_and_print(False)
