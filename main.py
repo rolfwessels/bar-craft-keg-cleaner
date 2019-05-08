@@ -1,24 +1,8 @@
-
+#!/usr/bin/python.
 from config import Pins
+from switch.tank_2_empty import empty_tank_two
 import time
 import sys
-
-
-# class MyClass:
-#     "This is my second class"
-#     a = 10
-
-#     def func(self):
-#         print('Hello')
-#         return "asdf"
-
-
-# def my_callback(channel):
-#     print("tank "+str(channel)+" empty")
-
-
-# print(MyClass().func())
-# my_callback(1)
 
 try:
     while True:
@@ -30,15 +14,20 @@ try:
         print('')
 
         while not Pins.is_started():
+            Pins.read_all()
             time.sleep(0.5)
             pass
 
         print('Starting')
+
+        if Pins.is_started() & (not Pins.tank_2_empty_button.is_on()):
+            empty_tank_two()
+
         print('press [start_stop] to stop.')
-        print("  Done   ")
-        Pins._startStop = False
+        print("Done ✔️ 🎉🎉🎉🎉🎉 ")
+        Pins.StartStop.set(False)
 
 
 except KeyboardInterrupt:
-    print('Stopping')
+    print('   💥  Stopping   💥')
     sys.exit
