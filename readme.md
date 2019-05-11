@@ -12,6 +12,12 @@ for testing you can add
 python main.py -d
 ```
 
+## Build a new release
+
+```bash
+make release
+```
+
 ## Setting up the pi
 
 ```bash
@@ -22,5 +28,5 @@ sudo raspi-config
 # Enable python 3.5
 echo alias python='/usr/bin/python3.5' > ~/.bashrc
 . ~/.bashrc
-sudo apt-get install rpi.gpio
+sudo apt-get install rpi.gpio zip
 ```
