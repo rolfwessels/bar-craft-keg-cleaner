@@ -11,12 +11,11 @@ def is_cancelled():
 
 def run_keg_clean():
     print("Start keg clean")
-
     Switches.air.write_and_print(True)
     safe_sleep(SleepTimeDELAY, is_cancelled)
     Switches.dump.write_and_print(True)
     safe_sleep(SleepTimeDMP, is_cancelled)
-
-    print("🎉🎉 keg clean done")
     Switches.dump.write_and_print(False)
     Switches.air.write_and_print(False)
+    if not is_cancelled():
+            print("🎉🎉 keg clean done")

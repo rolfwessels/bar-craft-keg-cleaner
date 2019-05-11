@@ -93,11 +93,15 @@ def final_clean():
 
 
 def run_and_wrap(stageName, function, totalTime=0):
+    if is_cancelled():
+        print("Skipping "+stageName+" ......")
+        return
     eta = datetime.datetime.now() + datetime.timedelta(0, totalTime)
     print('-------- '+stageName +
           ' Started [eta ' + eta.strftime("%H:%M")+'] --------')
     function()
-    print('-------- '+stageName+' Done 🎉 --------')
+    if not is_cancelled():
+        print('-------- '+stageName+' Done 🎉 --------')
     Switches.print_on()
     # print(TimeT.totalTime)
     # TimeT.totalTime = 0
@@ -114,5 +118,5 @@ def full_run():
 
 def run_full_run():
     run_and_wrap("Full run", full_run, 506)
-
-    print("🎉🎉🎉🎉 full run done 🎉🎉🎉🎉🎉🎉")
+    if not is_cancelled():
+        print("🎉🎉🎉🎉 full run done 🎉🎉🎉🎉🎉🎉")

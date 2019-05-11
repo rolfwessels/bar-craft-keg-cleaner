@@ -8,6 +8,8 @@ class TimeT:
 
 
 def safe_sleep(delay, is_cancelled):
+    if is_cancelled():
+        return
     stop_time = datetime.datetime.now() + datetime.timedelta(0, delay)
     if (delay > 60):
         print("sleeping "+str(delay)+"s eta", stop_time.strftime("%H:%M"))

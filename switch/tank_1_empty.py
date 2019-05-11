@@ -18,6 +18,8 @@ def run_empty_tank_one():
     Switches.dump.write_and_print(True)
     safe_sleep(SleepTimeDMP, is_cancelled)
 
-    print("🎉🎉 Tank 1 empty done")
     Switches.dump.write_and_print(False)
     Switches.pmp1.write_and_print(False)
+
+    if not is_cancelled():
+        print("🎉🎉 Tank 1 empty done")
