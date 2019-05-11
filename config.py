@@ -1,6 +1,10 @@
 import RPi.GPIO as GPIO
-from utils import PinInstance
-from utils import PinInstanceInverse
+from pins import PinInstance
+from pins import PinInstanceInverse
+
+
+class Config:
+    is_dry_run = False
 
 
 class Buttons:
@@ -22,18 +26,26 @@ class Buttons:
 
     @staticmethod
     def is_full_run_on():
+        if not Config.is_dry_run:
+            Buttons.full_run.set_and_print(Buttons.full_run.read())
         return Buttons.full_run.is_on()
 
     @staticmethod
     def is_tank_1_empty_on():
+        if not Config.is_dry_run:
+            Buttons.tank_1_empty.set_and_print(Buttons.tank_1_empty.read())
         return Buttons.tank_1_empty.is_on()
 
     @staticmethod
     def is_tank_2_empty_on():
+        if not Config.is_dry_run:
+            Buttons.tank_2_empty.set_and_print(Buttons.tank_2_empty.read())
         return Buttons.tank_2_empty.is_on()
 
     @staticmethod
     def is_keg_clean_on():
+        if not Config.is_dry_run:
+            Buttons.keg_clean.set_and_print(Buttons.keg_clean.read())
         return Buttons.keg_clean.is_on()
 
     @staticmethod
@@ -52,13 +64,13 @@ class Buttons:
 
 class Switches:
 
-    air = PinInstanceInverse("Air  ", 2, False)
-    dump = PinInstanceInverse("Dump ", 3, False)
+    air = PinInstanceInverse("Air    ", 2, False)
+    dump = PinInstanceInverse("Dump   ", 3, False)
     valve_t1 = PinInstanceInverse("Valve T1", 4, False)
     pmp2 = PinInstanceInverse("Pump 2", 5, False)
     recirc_t2 = PinInstanceInverse("Recirc T2", 6, False)
     valve_t2 = PinInstanceInverse("Valve T2", 12, False)
-    pmp1 = PinInstanceInverse("Pimp 1", 13, False)
+    pmp1 = PinInstanceInverse("Pump 1  ", 13, False)
     recirc_t1 = PinInstanceInverse("Recirc T1", 17, False)
 
     @staticmethod
@@ -87,6 +99,11 @@ class Switches:
         for value in Switches.all_pins():
             if value.is_on():
                 value.print()
+
+    @staticmethod
+    def reset_all():
+        for value in Switches.all_pins():
+            value.write_and_print(False)
 
 
 def read_and_print_pins(channel):

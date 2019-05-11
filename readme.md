@@ -1,5 +1,17 @@
 # BarCraft - Cleaner
 
+## Run the application
+
+```bash
+python main.py
+```
+
+for testing you can add
+
+```bash
+python main.py -d
+```
+
 ## Setting up the pi
 
 ```bash
